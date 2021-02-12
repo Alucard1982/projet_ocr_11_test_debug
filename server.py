@@ -19,6 +19,7 @@ app.secret_key = 'something_special'
 
 competitions = loadCompetitions()
 clubs = loadClubs()
+list_places = []
 
 
 @app.route('/')
@@ -28,8 +29,13 @@ def index():
 
 @app.route('/showSummary', methods=['POST'])
 def showSummary():
-    club = [club for club in clubs if club['email'] == request.form['email']][0]
-    return render_template('welcome.html', club=club, competitions=competitions)
+    # club = [club for club in clubs if club['email'] == request.form['email']][0]
+    for club in clubs:
+        if club['email'] == request.form['email']:
+            return render_template('welcome.html', club=club, competitions=competitions)
+    if club['email'] != request.form['email']:
+            flash("sorry this email doesn't exist")
+            return render_template('index.html')
 
 
 @app.route('/book/<competition>/<club>')
@@ -45,11 +51,17 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
+    CONST_MAX_PLACES = 12
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
-    flash('Great-booking complete!')
+    list_places.append(competition['numberOfPlaces'])
+    max_number_place_restante = list_places[0] - CONST_MAX_PLACES
+    if max_number_place_restante:
+        flash('sorry you have book more than 12 places')
+    else:
+        competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+        flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
