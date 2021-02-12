@@ -51,17 +51,12 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
-    CONST_MAX_PLACES = 12
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    list_places.append(competition['numberOfPlaces'])
-    max_number_place_restante = list_places[0] - CONST_MAX_PLACES
-    if max_number_place_restante:
-        flash('sorry you have book more than 12 places')
-    else:
-        competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
-        flash('Great-booking complete!')
+    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+    club['points'] = int(club['points']) - placesRequired
+    flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
