@@ -19,7 +19,6 @@ app.secret_key = 'something_special'
 
 competitions = loadCompetitions()
 clubs = loadClubs()
-list_places = []
 
 
 @app.route('/')
@@ -34,8 +33,8 @@ def showSummary():
         if club['email'] == request.form['email']:
             return render_template('welcome.html', club=club, competitions=competitions)
     if club['email'] != request.form['email']:
-            flash("sorry this email doesn't exist")
-            return render_template('index.html')
+        flash("sorry this email doesn't exist")
+        return render_template('index.html')
 
 
 @app.route('/book/<competition>/<club>')
@@ -54,9 +53,12 @@ def purchasePlaces():
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
-    club['points'] = int(club['points']) - placesRequired
-    flash('Great-booking complete!')
+    if int(club['points']) < placesRequired:
+        flash("no point avaible")
+    else:
+        competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
+        club['points'] = int(club['points']) - placesRequired
+        flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
 
 
