@@ -50,17 +50,18 @@ def book(competition, club):
 
 @app.route('/purchasePlaces', methods=['POST'])
 def purchasePlaces():
+    CONST_MAX_PLACES = 12
     competition = [c for c in competitions if c['name'] == request.form['competition']][0]
     club = [c for c in clubs if c['name'] == request.form['club']][0]
     placesRequired = int(request.form['places'])
-    if int(club['points']) < placesRequired:
-        flash("no point avaible")
+    if int(club['points']) < placesRequired or CONST_MAX_PLACES < placesRequired:
+        flash("Vous avez plus assez de points ou vous avez dépasser"
+              " le nombre maximum de places qui est de 12")
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
         club['points'] = int(club['points']) - placesRequired
         flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions)
-
 
 # TODO: Add route for points display
 
