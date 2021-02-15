@@ -56,7 +56,7 @@ def purchasePlaces():
     placesRequired = int(request.form['places'])
     if int(club['points']) < placesRequired or CONST_MAX_PLACES < placesRequired:
         flash("Vous avez plus assez de points ou vous avez dépasser"
-              " le nombre maximum de places qui est de 12")
+              " le nombre maximum de places à louer qui est de 12")
     else:
         competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
         club['points'] = int(club['points']) - placesRequired
