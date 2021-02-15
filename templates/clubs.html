@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clubs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="col-md-5">
+    <h3>Clubs</h3>
+    <a class="ml-auto" href="{{url_for('logout')}}">Logout</a>
+    <p>Club's secretary:{{club['name']}}</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Club's name</th>
+            <th scope="col">Avaible points</th>
+        </tr>
+        <thead/>
+        <tbody>
+        {% for club in clubs %}
+        <tr>
+            <td>{{club['name']}}</td>
+            <td>{{club['points']}}</td>
+        </tr>
+        {% endfor %}
+        <a href="{{url_for('showSummary', club=club['name'])}}">Booking Competition</a></td>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
