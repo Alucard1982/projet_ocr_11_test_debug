@@ -6,10 +6,10 @@ Projet qui permet de réserver des places dans des compétitions.Ici plusiseurs 
 et un feature a été implémenté.Une serie de test a été mis en place avec le module pytest ainsi
 qu'un test de performance avec le module locuste.
 Six Branche on été crée. Une pour chaque bug et feature.Une branch master réunis le tout.
-Pour lancer les tests taper la commande : pytest -vvv(à la racine du projet)
+Pour lancer les tests taper la commande : pytest -vvv(à la racine du projet).
 Un module coverage a été installé pour voir le pourcentage de couverture des tests sur le fichier server.py.
-Taper la commande :coverage report -m server.py
-Pour lancer le test de performance avec locust taper : locust -f locust.py(à la racine du projet)
+Taper la commande :coverage report -m server.py.
+Pour lancer le test de performance avec locust taper : locust -f locust.py(à la racine du projet).
 Une fois la commande locust tapé rendez vous à l'adresse : localhost:8089 
 
 Statut du projet
