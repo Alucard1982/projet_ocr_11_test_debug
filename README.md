@@ -1,51 +1,37 @@
-# gudlift-registration
+# Bug/Test Project
 
-1. Why
+Description générale du système ou du projet
 
+Projet qui permet de réserver des places dans des compétitions.Ici plusiseurs bug on était corrigés,
+et un feature a été implémenté.Une serie de test a été mis en place avec le module pytest ainsi
+qu'un test de performance avec le module locuste.
+Six Branche on été crée. Une pour chaque bug et feature.Une branch master réunis le tout.
+Pour lancer les tests taper la commande : pytest -vvv(à la racine du projet)
+Un module coverage a été installé pour voir le pourcentage de couverture des tests sur le fichier server.py.
+Taper la commande :coverage report -m server.py
+Pour lancer le test de performance avec locust taper : locust -f locust.py(à la racine du projet)
+Une fois la commande locust tapé rendez vous à l'adresse : localhost:8089 
 
-    This is a proof of concept (POC) project to show a light-weight version of our competition booking platform. The aim is the keep things as light as possible, and use feedback from the users to iterate.
+Statut du projet
 
-2. Getting Started
+Le développement du projet est fini.
 
-    This project uses the following technologies:
+Installation
 
-    * Python v3.x+
+2. créer le virtual env : python -m venv venv (à la racine du projet)
+3. switcher sur le virtual env : source venv/bin/activate pour linux ou venv\Scripts\activate pour windows(à la racine du projet)
+4. récupérer les modules du fichier requirements.txt sur votre venv : pip install -r requirements.txt(à la racine du projet)
 
-    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+Démarrage
 
-        Whereas Django does a lot of things for us out of the box, Flask allows us to add only what we need. 
-     
+ 1. Taper la commande :set FLASK_APP=server.py (à la racine du projet)
+ 2. lancer le serveur: flask run(à la racine du projet)
+Rendez-vous dans votre navigateur web à l'url indiquée par la ligne de commande,  http://127.0.0.1:5000/ 
 
-    * [Virtual environment](https://virtualenv.pypa.io/en/stable/installation.html)
+Fabriqué avec:
 
-        This ensures you'll be able to install the correct packages without interfering with Python on your machine.
+Pycharm
 
-        Before you begin, please ensure you have this installed globally. 
+Auteurs :
 
-
-3. Installation
-
-    - After cloning, change into the directory and type <code>virtualenv .</code>. This will then set up a a virtual python environment within that directory.
-
-    - Next, type <code>source bin/activate</code>. You should see that your command prompt has changed to the name of the folder. This means that you can install packages in here without affecting affecting files outside. To deactivate, type <code>deactivate</code>
-
-    - Rather than hunting around for the packages you need, you can install in one step. Type <code>pip install -r requirements.txt</code>. This will install all the packages listed in the respective file. If you install a package, make sure others know by updating the requirements.txt file. An easy way to do this is <code>pip freeze > requirements.txt</code>
-
-    - Flask requires that you set an environmental variable to the python file. However you do that, you'll want to set the file to be <code>server.py</code>. Check [here](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for more details
-
-    - You should now be ready to test the application. In the directory, type either <code>flask run</code> or <code>python -m flask run</code>. The app should respond with an address you should be able to go to using your browser.
-
-4. Current Setup
-
-    The app is powered by [JSON files](https://www.tutorialspoint.com/json/json_quick_guide.htm). This is to get around having a DB until we actually need one. The main ones are:
-     
-    * competitions.json - list of competitions
-    * clubs.json - list of clubs with relevant information. You can look here to see what email addresses the app will accept for login.
-
-5. Testing
-
-    You are free to use whatever testing framework you like-the main thing is that you can show what tests you are using.
-
-    We also like to show how well we're testing, so there's a module called 
-    [coverage](https://coverage.readthedocs.io/en/coverage-5.1/) you should add to your project.
-
+Florent Peyre alias Alucard

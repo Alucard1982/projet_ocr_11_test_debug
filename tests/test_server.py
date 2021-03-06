@@ -1,7 +1,7 @@
 import pytest
 import json
 
-from flask import template_rendered
+from flask import template_rendered, url_for
 from server import loadClubs, loadCompetitions, app
 from datetime import datetime
 
@@ -111,22 +111,6 @@ def test_view_book_ok(test_client, captured_templates):
     assert context["competition"] == competition
 
 
-"""def test_view_book_sad_path(test_client, captured_templates):
-    with open('tests/test_clubs.json') as c:
-        clubs = json.load(c)['clubs']
-    with open('tests/test_competitions.json') as c:
-        competitions = json.load(c)['competitions']
-    response = test_client.get('/book/Fall_Classic/Iron_Temple')
-    club = clubs[1]
-    assert response.status_code == 200
-    assert len(captured_templates) == 1
-    template, context = captured_templates[0]
-    assert template.name == 'welcome.html'
-    assert context["club"] == club
-    assert context["competitions"] == competitions
-    assert context["datetime"] == datetime"""
-
-
 def test_view_purchasePlace_nbPoint_inferieur_a_NbPLace_demande(test_client, captured_templates):
     with open('tests/test_clubs.json') as c:
         clubs = json.load(c)['clubs']
@@ -186,3 +170,9 @@ def test_view_purchasePlace_nbPoint_superieur_a_NbPLace_demande(test_client, cap
     assert context["club"] == club
     assert context["competitions"] == competitions
     assert context["datetime"] == datetime
+
+
+def test_logout_ok(test_client):
+    response = test_client.get('/logout')
+    assert response.status_code == 302
+    assert response.headers['Location'] == 'http://localhost/'
